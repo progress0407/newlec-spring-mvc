@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h3>hello spring mvc ~</h3>
+	<%-- <p>${data }</p> --%>
 </body>
 </html>
