@@ -28,7 +28,7 @@
     	<property name="prefix" value="/WEB-INF/view/" />
     	<property name="suffix" value=".jsp" />
     	<property name="order" value="2"></property>
-    </bean>  
+    </bean>
     
     <mvc:resources location="/static/" mapping="/**"></mvc:resources>
 	
