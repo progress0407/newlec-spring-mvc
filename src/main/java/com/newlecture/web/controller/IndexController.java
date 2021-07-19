@@ -13,7 +13,7 @@ public class IndexController implements Controller {
         
 	ModelAndView mv = new ModelAndView();
 	mv.addObject("data", "IndexControlelr~~");
-	mv.setViewName("index");
+	mv.setViewName("root.index");
 	
         return mv;
     }
