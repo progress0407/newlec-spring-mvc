@@ -7,9 +7,14 @@
     	http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+	<bean id="noticeService" class="com.newlecture.web.service.NoticeService" />
+	 
+    <bean name="/notice/list" class="com.newlecture.web.controller.notice.ListController" >
+    	<property name="noticeService" ref="noticeService" />
+    </bean>
+    
     <bean name="/index" class="com.newlecture.web.controller.IndexController" />
     
-    <bean name="/notice/list" class="com.newlecture.web.controller.notice.ListController" />
     <bean name="/notice/detail" class="com.newlecture.web.controller.notice.DetailController" />
     
     <bean
