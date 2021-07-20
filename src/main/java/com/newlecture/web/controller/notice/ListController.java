@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.newlecture.web.entity.Notice;
-import com.newlecture.web.service.NoticeService;
+import com.newlecture.web.service.jdbc.JDBCNoticeService;
 
 public class ListController implements Controller {
     
-    private NoticeService noticeService;
+    private JDBCNoticeService noticeService;
     
-    public void setNoticeService(NoticeService noticeService) {
+    public void setNoticeService(JDBCNoticeService noticeService) {
         this.noticeService = noticeService;
     }
 
