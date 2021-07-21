@@ -22,8 +22,6 @@ public class NoticeController {
     @RequestMapping("list")
     public String list(@RequestParam(value="p", required = false) Integer page) {
 	
-	System.out.println(">>>>>>>" + page);
-	
 	List<Notice> list = noticeService.getList(1, "TITLE", "");
 	
 	return "notice.list";
