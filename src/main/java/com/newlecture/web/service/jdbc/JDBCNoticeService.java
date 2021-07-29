@@ -12,6 +12,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.newlecture.web.entity.Notice;
@@ -33,43 +35,12 @@ public class JDBCNoticeService implements NoticeService {
 	int start = 1 + (page-1)*10; //1, 11, 21 ...
 	int end = 10*page; // 10, 20, ...
 	
-	String sql =  "SELECT * FROM NOTICE_VIEW WHERE " + field + " LIKE ? AND NUM BETWEEN ? AND ?" ;
+//	String sql =  "SELECT * FROM NOTICE_VIEW WHERE " + field + " LIKE ? AND NUM BETWEEN ? AND ?" ;
+	String sql =  "SELECT * FROM NOTICE";
 	
-	Connection con = null;
-	PreparedStatement st = null;
-	ResultSet rs = null;
-	
-	try {
-	    con = dataSource.getConnection();
-	    st = con.prepareStatement(sql);
-	    st.setString(1, "%" + query + "%");
-	    st.setInt(2, start);
-	    st.setInt(3, end);
-	    rs = st.executeQuery();
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	}
-	
-	Notice notice;
-	List<Notice> list = new ArrayList<>();
-	
-	try {
-	    while(rs.next()) {
-	        int id = rs.getInt("ID");
-	        String title = rs.getString("TITLE");
-	        Date regdate = rs.getDate("REGDATE");
-	        String writerId = rs.getString("WRITER_ID");
-	        int hit = rs.getInt("HIT");
-	        String files = rs.getString("FILES");
-	        String content = rs.getString("CONTENT");
-	        int pub = rs.getInt("pub");
-	        
-	        notice = new Notice(id, title, regdate, writerId, hit, files, content, pub);
-	        list.add(notice);
-	    }
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	}
+	JdbcTemplate template = new JdbcTemplate();
+	template.setDataSource(dataSource);
+	List<Notice> list = template.query(sql, new BeanPropertyRowMapper<Notice>(Notice.class));
 	
 	
 	return list;
