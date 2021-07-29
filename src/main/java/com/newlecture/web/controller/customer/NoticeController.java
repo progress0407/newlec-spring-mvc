@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,9 +21,10 @@ public class NoticeController {
     private NoticeService noticeService;
     
     @RequestMapping("list")
-    public String list(@RequestParam(value="p", required = false) Integer page) {
+    public String list(@RequestParam(value="p", required = false) Integer page, Model model) {
 	
 	List<Notice> list = noticeService.getList(1, "TITLE", "");
+	model.addAttribute("list", list);
 	
 	return "notice.list";
     }
